@@ -7,5 +7,7 @@ public class Test {
         System.out.println("Jakas zmiana");
 
         System.out.println("Jakas nastepna zmiana !!");
+
+        System.out.println("cos");
     }
 }
