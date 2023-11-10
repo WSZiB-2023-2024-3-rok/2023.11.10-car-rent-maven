@@ -5,5 +5,7 @@ public class Test {
         System.out.println("Pierwszy commit");
 
         System.out.println("Jakas zmiana");
+
+        System.out.println("Jakas nastepna zmiana !!");
     }
 }
