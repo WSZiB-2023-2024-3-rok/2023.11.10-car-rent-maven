@@ -1,9 +1,12 @@
 package pl.edu.wszib.car.rent.gui;
 
+import pl.edu.wszib.car.rent.authorization.Authenticator;
 import pl.edu.wszib.car.rent.model.Car;
+import pl.edu.wszib.car.rent.model.LuxuryCar;
 import pl.edu.wszib.car.rent.model.User;
 import pl.edu.wszib.car.rent.model.Vehicle;
 
+import java.util.Collection;
 import java.util.Scanner;
 
 public class GUI {
@@ -11,7 +14,8 @@ public class GUI {
     public static String showMenuAndReadChoose() {
         System.out.println("1. List cars");
         System.out.println("2. Rent car");
-        System.out.println("3. Exit");
+        System.out.println("3. Return car");
+        System.out.println("4. Exit");
         return scanner.nextLine();
     }
 
@@ -21,9 +25,13 @@ public class GUI {
         }
     }
 
-    public static void listVehicles(Vehicle[] vehicles) {
+    public static void listVehicles(Collection<Vehicle> vehicles) {
         for(Vehicle vehicle : vehicles) {
-            System.out.println(vehicle.toString());
+            if(vehicle instanceof LuxuryCar &&
+                    !Authenticator.loggedUser.getRole().equals("ADMIN")) {
+                continue;
+            }
+            System.out.println(vehicle);
         }
     }
 
@@ -32,7 +40,7 @@ public class GUI {
         return scanner.nextLine();
     }
 
-    public static void showRentResult(boolean result) {
+    public static void showResult(boolean result) {
         if(result) {
             System.out.println("Success !!");
         } else {

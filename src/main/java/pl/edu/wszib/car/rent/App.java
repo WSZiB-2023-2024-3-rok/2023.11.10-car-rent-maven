@@ -12,7 +12,8 @@ public class App {
         int counter = 0;
 
         while(!run && counter < 3) {
-            run = authenticator.authenticate(GUI.readAuthData());
+            authenticator.authenticate(GUI.readAuthData());
+            run = Authenticator.loggedUser != null;
             counter++;
         }
 
@@ -22,9 +23,12 @@ public class App {
                     GUI.listVehicles(vehicleRepository.getVehicles());
                     break;
                 case "2":
-                    GUI.showRentResult(vehicleRepository.rent(GUI.readPlate()));
+                    GUI.showResult(vehicleRepository.rent(GUI.readPlate()));
                     break;
                 case "3":
+                    GUI.showResult(vehicleRepository.returnVehicle(GUI.readPlate()));
+                    break;
+                case "4":
                     run = false;
                     break;
                 default:
